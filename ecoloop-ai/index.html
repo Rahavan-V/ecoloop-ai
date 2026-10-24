@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoLoop AI — Agentic AI Autonomous EV Battery Waste Prevention</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+  
+  <!-- Tailwind CSS via CDN for instant zero-config rendering -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            eco: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              950: '#052e16'
+            },
+            tealEco: {
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(34, 197, 94, 0.3);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(34, 197, 94, 0.6);
+    }
+    .glow-green {
+      box-shadow: 0 0 25px -5px rgba(34, 197, 94, 0.25);
+    }
+    .pulse-subtle {
+      animation: pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulseSubtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-eco-500 selection:text-slate-950">
+
+  <!-- TOP NOTIFICATION BANNER: SAFETY & ADVISORY NOTICE -->
+  <div class="bg-emerald-950/80 border-b border-emerald-500/30 px-4 py-2 text-xs md:text-sm text-emerald-200 flex flex-wrap items-center justify-between gap-2 shadow-inner">
+    <div class="flex items-center space-x-2">
+      <span class="inline-flex items-center justify-center p-1 bg-emerald-500/20 text-emerald-400 rounded">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </span>
+      <span><strong>Advisory Guidance Only:</strong> EcoLoop AI agent recommendations do not replace certified physical testing (UL 1974 / IEC 62619). Damaged or swollen packs are strictly routed to qualified inspection.</span>
+    </div>
+    <div class="flex items-center space-x-3 text-xs">
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-900/60 border border-emerald-500/40 text-emerald-300 font-mono">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping mr-1.5"></span>
+        Multi-Agent Engine Active
+      </span>
+      <span class="text-slate-400 font-mono hidden md:inline">No API Key Required</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-eco-500 to-tealEco-600 flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-eco-500/20">
+          <svg class="w-6 h-6 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-eco-400 bg-clip-text text-transparent">
+              EcoLoop AI
+            </h1>
+            <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-eco-500/10 text-eco-400 border border-eco-500/30">
+              Agentic v1.0
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Autonomous EV Battery Waste Prevention &amp; Second-Life Orchestration
+          </p>
+        </div>
+      </div>
+
+      <!-- Engine Status & Backend Connectivity Switch -->
+      <div class="flex items-center space-x-3">
+        <div id="backendStatusPill" class="flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium border bg-slate-800/80 border-slate-700 text-slate-300">
+          <span id="backendDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="backendText">Autonomous Simulation Engine</span>
+        </div>
+        <button id="btnCheckBackend" title="Ping FastAPI Backend at http://localhost:8000" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-colors flex items-center space-x-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span class="hidden sm:inline">Connect FastAPI</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1 w-full">
+
+    <!-- PRESET DEMO SCENARIOS BAR -->
+    <section class="bg-slate-900/80 rounded-2xl border border-slate-800 p-4 shadow-xl">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center space-x-2">
+          <svg class="w-4 h-4 text-eco-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Curated Demo Battery Scenarios</span>
+        </div>
+        <span class="text-xs text-slate-400">Click to instantly dispatch agents with real-world telemetry</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5" id="scenarioButtonsContainer">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- AGENT PIPELINE VISUALIZER (Autonomous Workflow) -->
+    <section class="bg-slate-900/70 rounded-2xl border border-slate-800 p-4 sm:p-5 relative overflow-hidden shadow-xl">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-eco-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-eco-500"></span>
+            </span>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-200">
+              Autonomous Multi-Agent Workflow Pipeline
+            </h2>
+          </div>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Real-time status, latency, and inter-agent data arbitration
+          </p>
+        </div>
+        <div class="text-xs font-mono text-slate-400 bg-slate-950/80 px-3 py-1 rounded-lg border border-slate-800 flex items-center space-x-2">
+          <span>Total Pipeline Latency:</span>
+          <span id="pipelineTotalTime" class="text-eco-400 font-bold">12.4 ms</span>
+        </div>
+      </div>
+
+      <!-- Pipeline Steps Flowchart -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3 relative z-10" id="agentPipelineCards">
+        <!-- 1. Data Validation Agent -->
+        <div id="agentCardValidation" class="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Step 1</span>
+              <span class="status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Completed</span>
+            </div>
+            <h3 class="text-xs font-bold text-slate-200">Data Validation Agent</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Screening bounds, sensor anomalies &amp; safety hazards</p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>Latency</span>
+            <span class="agent-time text-slate-300">1.8 ms</span>
+          </div>
+        </div>
+
+        <!-- 2. Battery Health Analysis Agent -->
+        <div id="agentCardHealth" class="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Step 2</span>
+              <span class="status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Completed</span>
+            </div>
+            <h3 class="text-xs font-bold text-slate-200">Battery Health Agent</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Estimating SoH, cell balance &amp; Remaining Useful Life</p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>Latency</span>
+            <span class="agent-time text-slate-300">3.2 ms</span>
+          </div>
+        </div>
+
+        <!-- 3. Decision-Making Orchestrator -->
+        <div id="agentCardOrchestrator" class="bg-slate-950/70 border border-eco-500/40 rounded-xl p-3 flex flex-col justify-between shadow-lg shadow-eco-950/40 transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-eco-950 text-eco-400 border border-eco-500/30">Step 3 (Core)</span>
+              <span class="status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Arbitrating</span>
+            </div>
+            <h3 class="text-xs font-bold text-eco-300">Decision Orchestrator</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Synthesizing findings &amp; selecting optimal path</p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>Latency</span>
+            <span class="agent-time text-slate-300">4.1 ms</span>
+          </div>
+        </div>
+
+        <!-- 4. Second-Life Recommendation Agent -->
+        <div id="agentCardSecondLife" class="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Step 4A</span>
+              <span class="status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Active</span>
+            </div>
+            <h3 class="text-xs font-bold text-slate-200">Second-Life Agent</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Solar microgrid, UPS &amp; off-grid application matching</p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>Latency</span>
+            <span class="agent-time text-slate-300">2.1 ms</span>
+          </div>
+        </div>
+
+        <!-- 5. Recycling & Sustainability Agent -->
+        <div id="agentCardRecycling" class="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Step 4B</span>
+              <span class="status-badge text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">Active</span>
+            </div>
+            <h3 class="text-xs font-bold text-slate-200">Recycling Agent</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Critical mineral yields (Li, Ni, Co) &amp; CO₂ avoided</p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-400">
+            <span>Latency</span>
+            <span class="agent-time text-slate-300">1.2 ms</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN WORKSPACE: LEFT (INPUT FORM) | RIGHT (RESULTS & DASHBOARD) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT: INTERACTIVE BATTERY PARAMETER CONTROLS (4 COLS) -->
+      <div class="lg:col-span-4 bg-slate-900/80 rounded-2xl border border-slate-800 p-5 shadow-xl space-y-4 sticky top-20">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-200 flex items-center space-x-1.5">
+              <span>Battery Telemetry Input</span>
+            </h2>
+            <p class="text-xs text-slate-400">Adjust any parameter to trigger instant re-analysis</p>
+          </div>
+          <button id="btnResetDefaults" class="text-[11px] font-medium text-eco-400 hover:text-eco-300 hover:underline">
+            Reset
+          </button>
+        </div>
+
+        <form id="batteryForm" class="space-y-4" onsubmit="event.preventDefault();">
+          
+          <!-- Battery Identifier & Chemistry -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Battery ID</label>
+              <input type="text" id="inputBatteryId" value="BAT-2026-EV-901" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Chemistry</label>
+              <select id="inputChemistry" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:border-eco-500 focus:outline-none">
+                <option value="NMC-622">NMC-622</option>
+                <option value="NMC-811" selected>NMC-811</option>
+                <option value="LFP">LFP (Iron Phosphate)</option>
+                <option value="NCA">NCA (Nickel Cobalt Al)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- State of Health (SoH %) Slider -->
+          <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800/80">
+            <div class="flex justify-between items-center mb-1">
+              <label for="inputSoH" class="text-xs font-semibold text-slate-300">State of Health (SoH)</label>
+              <span id="valSoH" class="text-xs font-mono font-bold text-eco-400 bg-eco-950/60 px-2 py-0.5 rounded border border-eco-500/30">76.0%</span>
+            </div>
+            <input type="range" id="inputSoH" min="10" max="100" step="0.5" value="76.0" class="w-full accent-emerald-500 cursor-pointer" />
+            <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
+              <span>10% (EOL)</span>
+              <span>70% (2nd Life Sweet Spot)</span>
+              <span>100% (New)</span>
+            </div>
+          </div>
+
+          <!-- Capacity & Nominal Pack Specs -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Pack Size (kWh)</label>
+              <input type="number" id="inputPackCapacity" value="75.0" step="1" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Cycles</label>
+              <input type="number" id="inputCycleCount" value="1420" step="50" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Operating Temp & Internal Resistance -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Pack Temp (°C)</label>
+                <span id="tempWarningIcon" class="text-amber-400 text-xs hidden">⚠️</span>
+              </div>
+              <input type="number" id="inputTemp" value="24.5" step="0.5" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Resistance (mΩ)</label>
+              <input type="number" id="inputResistance" value="17.5" step="0.5" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Cell Voltage Variance Delta & Voltage -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Cell Δ Variance (V)</label>
+              <input type="number" id="inputCellDelta" value="0.018" step="0.005" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Voltage (V)</label>
+              <input type="number" id="inputVoltage" value="355.2" step="1" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Physical Condition Screening -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Physical Integrity</label>
+            <select id="inputCondition" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 text-xs text-slate-200 focus:border-eco-500 focus:outline-none">
+              <option value="Normal">Normal — No Casing Deformation</option>
+              <option value="Swelling">Swelling — Pouch/Module Expansion (Hazard)</option>
+              <option value="Corrosion">Corrosion — Terminal Oxidation</option>
+              <option value="Puncture">Puncture / Structural Compromise (Critical)</option>
+              <option value="Seal Breach">Seal Breach / Electrolyte Odor (Hazard)</option>
+            </select>
+          </div>
+
+          <!-- Weight -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Pack Weight (kg)</label>
+            <input type="number" id="inputWeight" value="440.0" step="5" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-eco-500 focus:outline-none" />
+          </div>
+
+          <div class="pt-2">
+            <button id="btnRunPipeline" class="w-full bg-gradient-to-r from-eco-600 to-tealEco-600 hover:from-eco-500 hover:to-tealEco-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-all duration-200 shadow-lg shadow-eco-600/30 flex items-center justify-center space-x-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>Trigger Multi-Agent Analysis</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- RIGHT: RESULTS DASHBOARD (8 COLS) -->
+      <div class="lg:col-span-8 space-y-6">
+
+        <!-- 1. DECISION-MAKING ORCHESTRATOR CARD -->
+        <div id="decisionCard" class="bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-eco-500/40 p-5 shadow-2xl relative overflow-hidden glow-green">
+          <!-- Ambient decorative light -->
+          <div class="absolute -right-16 -top-16 w-48 h-48 bg-eco-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
+            <div class="flex items-center space-x-2">
+              <span class="p-1.5 rounded-lg bg-eco-500/20 text-eco-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </span>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-eco-400 font-semibold">Orchestrator Consensus</span>
+                <h3 class="text-base font-extrabold text-white">Final Life-Cycle Decision</h3>
+              </div>
+            </div>
+
+            <!-- Decision Badge -->
+            <div id="decisionBadge" class="px-3.5 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 flex items-center space-x-1.5">
+              <span>EVALUATE SECOND-LIFE REUSE</span>
+            </div>
+          </div>
+
+          <!-- Summary & Confidence -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-4">
+            <div class="md:col-span-3">
+              <p id="decisionSummary" class="text-sm text-slate-200 leading-relaxed font-medium">
+                Battery is prime for stationary second-life repurposing (76.0% SoH). Stable cell balance and low degradation profile provide an estimated 5.8 additional years of clean energy storage before mineral recycling.
+              </p>
+            </div>
+            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800 text-center flex flex-col justify-center">
+              <span class="text-[10px] font-mono text-slate-400 uppercase">Agent Confidence</span>
+              <span id="decisionConfidence" class="text-2xl font-black text-eco-400">92%</span>
+              <span class="text-[9px] text-slate-400">Consensus Metric</span>
+            </div>
+          </div>
+
+          <!-- Transparent Reasoning Factors -->
+          <div class="bg-slate-950/60 rounded-xl p-3.5 border border-slate-800 space-y-2">
+            <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold block">
+              Transparent Decision Rationale (Key Influencing Factors):
+            </span>
+            <ul id="reasoningList" class="space-y-1.5 text-xs text-slate-300">
+              <!-- Injected by JS -->
+            </ul>
+          </div>
+
+          <!-- Transparency Notice -->
+          <div class="mt-3 flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-800/60">
+            <span class="flex items-center space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-eco-400 inline-block"></span>
+              <span><strong>Logic Mode:</strong> Deterministic Multi-Agent Rule Engine with Simulated Reasoning Trace</span>
+            </span>
+            <span class="font-mono text-[10px]">Model: Heuristic v1.2</span>
+          </div>
+        </div>
+
+        <!-- 2. BATTERY HEALTH ANALYSIS & REMAINING USEFUL LIFE -->
+        <div class="bg-slate-900/80 rounded-2xl border border-slate-800 p-5 shadow-xl space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div class="flex items-center space-x-2">
+              <span class="p-1.5 rounded-lg bg-tealEco-600/20 text-tealEco-500">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </span>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-teal-400 font-semibold">Agent 1 Findings</span>
+                <h3 class="text-sm font-extrabold text-white">Battery Health &amp; Degradation Analysis</h3>
+              </div>
+            </div>
+            <span id="healthConditionBadge" class="text-xs px-2.5 py-1 rounded-full font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Good (Degraded)
+            </span>
+          </div>
+
+          <!-- Gauges Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Estimated RUL</span>
+              <span id="healthRulYears" class="text-lg font-bold text-white mt-0.5 block">5.8 yrs</span>
+              <span id="healthRulCycles" class="text-[10px] text-slate-400 font-mono">~1,440 cycles</span>
+            </div>
+            <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Cell Imbalance</span>
+              <span id="healthCellDelta" class="text-lg font-bold text-white mt-0.5 block">0.018 V</span>
+              <span id="healthCellStatus" class="text-[10px] text-emerald-400 font-mono">Balanced</span>
+            </div>
+            <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Thermal Profile</span>
+              <span id="healthTemp" class="text-lg font-bold text-white mt-0.5 block">24.5 °C</span>
+              <span id="healthThermalStatus" class="text-[10px] text-emerald-400 font-mono">Normal Window</span>
+            </div>
+            <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Internal Impedance</span>
+              <span id="healthResistance" class="text-lg font-bold text-white mt-0.5 block">17.5 mΩ</span>
+              <span id="healthIrStatus" class="text-[10px] text-emerald-400 font-mono">Acceptable</span>
+            </div>
+          </div>
+
+          <!-- Inspection Alert Box (Appears when flagged) -->
+          <div id="inspectionAlertBox" class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 text-xs text-amber-200 hidden">
+            <div class="flex items-center space-x-2 font-bold mb-1">
+              <span>⚠️ Professional Inspection Flagged:</span>
+            </div>
+            <ul id="inspectionReasonsList" class="list-disc list-inside space-y-0.5 text-slate-300">
+              <!-- Reasons injected by JS -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. SECOND-LIFE RECOMMENDATION APPLICATIONS -->
+        <div id="secondLifeCard" class="bg-slate-900/80 rounded-2xl border border-slate-800 p-5 shadow-xl space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div class="flex items-center space-x-2">
+              <span class="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+              </span>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">Agent 2 Findings</span>
+                <h3 class="text-sm font-extrabold text-white">Recommended Second-Life Applications</h3>
+              </div>
+            </div>
+            <span id="secondLifeEligibleBadge" class="text-xs px-2.5 py-1 rounded-full font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Eligible for Repurposing
+            </span>
+          </div>
+
+          <div id="secondLifeApplicationsContainer" class="space-y-3">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- 4. RECYCLING & SUSTAINABILITY IMPACT -->
+        <div class="bg-slate-900/80 rounded-2xl border border-slate-800 p-5 shadow-xl space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div class="flex items-center space-x-2">
+              <span class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+              </span>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-blue-400 font-semibold">Agent 3 Findings</span>
+                <h3 class="text-sm font-extrabold text-white">Closed-Loop Recycling &amp; Sustainability Benefits</h3>
+              </div>
+            </div>
+            <span id="recyclingPriorityBadge" class="text-xs px-2.5 py-1 rounded-full font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              Circular Economy Assessment
+            </span>
+          </div>
+
+          <!-- Environmental Impact Counters -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-lg">
+                🌱
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-mono block">CO₂ Avoided</span>
+                <span id="metricCo2" class="text-base font-extrabold text-white">1,694 kg CO₂e</span>
+                <span class="text-[9px] text-slate-400 block">vs virgin raw mining</span>
+              </div>
+            </div>
+
+            <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-lg">
+                📦
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-mono block">Landfill Diverted</span>
+                <span id="metricWaste" class="text-base font-extrabold text-white">413.6 kg</span>
+                <span class="text-[9px] text-slate-400 block">94% mass circularity</span>
+              </div>
+            </div>
+
+            <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-lg">
+                💧
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-mono block">Water Conserved</span>
+                <span id="metricWater" class="text-base font-extrabold text-white">114,400 L</span>
+                <span class="text-[9px] text-slate-400 block">extraction footprint</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Critical Material Yield Recovery Table -->
+          <div>
+            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Estimated Strategic Mineral Yields (Demo Model):</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="materialRecoveryGrid">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. STEP-BY-STEP AGENT DECISION TRACE AUDIT LOG -->
+        <div class="bg-slate-900/80 rounded-2xl border border-slate-800 p-5 shadow-xl space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+            <div class="flex items-center space-x-2">
+              <span class="p-1 rounded bg-slate-800 text-slate-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </span>
+              <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                Explainable Decision Trace &amp; Audit Log
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono text-slate-400">Step-by-step reasoning evidence</span>
+          </div>
+
+          <div id="decisionTraceTimeline" class="space-y-2.5 pt-1">
+            <!-- Timeline steps injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 mt-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
+      <div class="flex items-center space-x-2">
+        <span class="text-eco-400 font-bold">EcoLoop AI</span>
+        <span>•</span>
+        <span>Agentic AI-Powered Autonomous EV Battery Waste Prevention System</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>Static GitHub Pages &amp; FastAPI Compatible</span>
+        <a href="https://github.com" target="_blank" class="hover:text-eco-400 transition-colors">GitHub Repository Ready</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CLIENT-SIDE AGENTIC SIMULATION SCRIPT -->
+  <script>
+    // CURATED DEMO SCENARIOS
+    const SCENARIOS = [
+      {
+        id: "scenario-second-life",
+        title: "⚡ Prime Second-Life (76% SoH)",
+        subtitle: "Solar Microgrid & Energy Buffer",
+        battery: {
+          battery_id: "BAT-NMC-760-SL",
+          chemistry: "NMC-811",
+          state_of_health_pct: 76.0,
+          pack_capacity_kwh: 75.0,
+          current_capacity_kwh: 57.0,
+          cycle_count: 1420,
+          operating_temp_c: 24.5,
+          internal_resistance_mohm: 17.5,
+          cell_voltage_delta_v: 0.018,
+          current_voltage_v: 355.2,
+          physical_condition: "Normal",
+          battery_weight_kg: 440.0
+        }
+      },
+      {
+        id: "scenario-healthy-ev",
+        title: "🚗 Healthy EV Pack (89% SoH)",
+        subtitle: "Continue Automotive Use",
+        battery: {
+          battery_id: "BAT-EV-HEALTHY-890",
+          chemistry: "NMC-622",
+          state_of_health_pct: 89.0,
+          pack_capacity_kwh: 77.4,
+          current_capacity_kwh: 68.9,
+          cycle_count: 410,
+          operating_temp_c: 22.0,
+          internal_resistance_mohm: 11.2,
+          cell_voltage_delta_v: 0.009,
+          current_voltage_v: 395.0,
+          physical_condition: "Normal",
+          battery_weight_kg: 475.0
+        }
+      },
+      {
+        id: "scenario-safety-hazard",
+        title: "⚠️ Critical Hazard (Overheating)",
+        subtitle: "Physical Swelling & Isolation",
+        battery: {
+          battery_id: "BAT-HAZARD-CRIT-911",
+          chemistry: "NMC-622",
+          state_of_health_pct: 67.0,
+          pack_capacity_kwh: 40.0,
+          current_capacity_kwh: 26.8,
+          cycle_count: 1820,
+          operating_temp_c: 53.4,
+          internal_resistance_mohm: 58.0,
+          cell_voltage_delta_v: 0.145,
+          current_voltage_v: 338.0,
+          physical_condition: "Swelling",
+          battery_weight_kg: 303.0
+        }
+      },
+      {
+        id: "scenario-deep-recycle",
+        title: "♻️ Depleted Pack (46% SoH)",
+        subtitle: "Direct Mineral Recovery",
+        battery: {
+          battery_id: "BAT-RECYCLE-EOL-460",
+          chemistry: "NMC-622",
+          state_of_health_pct: 46.0,
+          pack_capacity_kwh: 60.0,
+          current_capacity_kwh: 27.6,
+          cycle_count: 3100,
+          operating_temp_c: 25.0,
+          internal_resistance_mohm: 44.5,
+          cell_voltage_delta_v: 0.065,
+          current_voltage_v: 332.0,
+          physical_condition: "Normal",
+          battery_weight_kg: 430.0
+        }
+      },
+      {
+        id: "scenario-backup-ups",
+        title: "🔋 UPS / Telecom (69% SoH)",
+        subtitle: "Emergency Standby Reserve",
+        battery: {
+          battery_id: "BAT-UPS-RESID-690",
+          chemistry: "NMC-622",
+          state_of_health_pct: 69.0,
+          pack_capacity_kwh: 52.0,
+          current_capacity_kwh: 35.8,
+          cycle_count: 1690,
+          operating_temp_c: 21.0,
+          internal_resistance_mohm: 22.0,
+          cell_voltage_delta_v: 0.028,
+          current_voltage_v: 392.0,
+          physical_condition: "Normal",
+          battery_weight_kg: 326.0
+        }
+      }
+    ];
+
+    let currentBattery = { ...SCENARIOS[0].battery };
+    let useFastApiBackend = false;
+    let fastApiAvailable = false;
+
+    // CLIENT-SIDE MULTI-AGENT EXECUTION ENGINE
+    // Mirrors backend/agents Python logic exactly
+    function runClientSideAgentPipeline(b) {
+      const startTime = performance.now();
+      const trace = [];
+      const nowStr = new Date().toLocaleTimeString();
+
+      // STEP 1: Data Validation Agent
+      const t1Start = performance.now();
+      const valIssues = [];
+      let safetyOverride = false;
+
+      if (b.physical_condition !== "Normal") {
+        safetyOverride = true;
+        valIssues.push(`Severe physical condition '${b.physical_condition}' detected. Immediate isolation required.`);
+      }
+      if (b.operating_temp_c > 50.0) {
+        safetyOverride = true;
+        valIssues.push(`Critical high temperature (${b.operating_temp_c}°C > 50.0°C). Thermal runaway risk.`);
+      } else if (b.operating_temp_c > 42.0) {
+        valIssues.push(`Elevated operating temperature (${b.operating_temp_c}°C). Thermal monitoring required.`);
+      }
+      if (b.cell_voltage_delta_v >= 0.12) {
+        safetyOverride = true;
+        valIssues.push(`Extreme cell voltage variance (${b.cell_voltage_delta_v.toFixed(3)}V >= 0.12V) indicates cell internal failure.`);
+      }
+      if (b.internal_resistance_mohm > 60.0) {
+        safetyOverride = true;
+        valIssues.push(`Internal resistance dangerously high (${b.internal_resistance_mohm} mΩ > 60.0 mΩ).`);
+      }
+      const valLatency = (performance.now() - t1Start).toFixed(1);
+
+      trace.push({
+        step: 1,
+        agent: "Data Validation Agent",
+        action: "Telemetry Ingestion & Safety Screening",
+        reasoning: `Validated ${b.battery_id}: SoH=${b.state_of_health_pct}%, Temp=${b.operating_temp_c}°C, Condition='${b.physical_condition}'`,
+        rule: "Rule-VAL-01: Screening physical casing and electro-thermal bounds"
+      });
+
+      // STEP 2: Battery Health Analysis Agent
+      const t2Start = performance.now();
+      const reasonsForInspection = [...valIssues];
+      let conditionRating = "Optimal";
+
+      if (b.physical_condition !== "Normal") {
+        conditionRating = "Critical Safety Hazard";
+      } else if (b.state_of_health_pct >= 85.0 && b.cell_voltage_delta_v < 0.03) {
+        conditionRating = "Optimal";
+      } else if (b.state_of_health_pct >= 75.0 && b.cell_voltage_delta_v < 0.05) {
+        conditionRating = "Good (Degraded)";
+      } else if (b.state_of_health_pct >= 60.0) {
+        conditionRating = "Moderate Degradation";
+      } else if (b.state_of_health_pct >= 45.0) {
+        conditionRating = "Severe Degradation";
+        reasonsForInspection.push(`SoH deeply degraded (${b.state_of_health_pct}% < 60%)`);
+      } else {
+        conditionRating = "Critical Safety Hazard";
+        reasonsForInspection.push("Exhausted cell capacity below safe operation envelope");
+      }
+
+      let thermalStatus = "Normal Window";
+      if (b.operating_temp_c > 48.0 || b.operating_temp_c < -10.0) {
+        thermalStatus = "Severe Thermal Risk";
+      } else if (b.operating_temp_c > 38.0) {
+        thermalStatus = "Elevated";
+      }
+
+      let cellBalance = "Balanced";
+      if (b.cell_voltage_delta_v > 0.08) {
+        cellBalance = "Severe Imbalance";
+      } else if (b.cell_voltage_delta_v > 0.035) {
+        cellBalance = "Mild Imbalance";
+      }
+
+      let irStatus = "Acceptable";
+      if (b.internal_resistance_mohm > 50.0) {
+        irStatus = "Dangerous";
+      } else if (b.internal_resistance_mohm > 30.0) {
+        irStatus = "High";
+      }
+
+      let rulCycles = 0;
+      let rulYears = 0.0;
+      if (conditionRating !== "Critical Safety Hazard" && b.physical_condition === "Normal") {
+        const remainingSoh = Math.max(0, b.state_of_health_pct - 55.0);
+        rulCycles = Math.round(remainingSoh / 0.016);
+        rulYears = (rulCycles / 250.0).toFixed(1);
+      }
+      const healthLatency = (performance.now() - t2Start).toFixed(1);
+
+      trace.push({
+        step: 2,
+        agent: "Battery Health Analysis Agent",
+        action: "Degradation & Useful Life Modeling",
+        reasoning: `Determined Condition='${conditionRating}', Projected RUL=${rulCycles} cycles (~${rulYears} yrs), Imbalance='${cellBalance}'`,
+        rule: "Rule-HLT-04: Deterministic degradation modeling & RUL estimation"
+      });
+
+      // STEP 3: Decision-Making Orchestrator
+      const t3Start = performance.now();
+      let decision = "";
+      let summary = "";
+      let confidence = 90;
+      let reasoningFactors = [];
+      let secondLifeData = null;
+
+      if (safetyOverride || conditionRating === "Critical Safety Hazard") {
+        decision = "INSPECT_OR_REPAIR";
+        confidence = 96;
+        reasoningFactors = [
+          `SAFETY OVERRIDE: Physical condition '${b.physical_condition}' or critical thermal/cell delta anomaly.`,
+          "Second-life repurposing strictly rejected to prevent thermal runaway hazard.",
+          "Mandatory certified laboratory diagnostic before authorized disposal."
+        ];
+        summary = `Battery ${b.battery_id} displays critical safety hazard flags. Immediate physical isolation and certified inspection required. Repurposing is strictly barred.`;
+
+        trace.push({
+          step: 3,
+          agent: "Decision-Making Orchestrator",
+          action: "Safety Policy Enforcement",
+          reasoning: "Safety anomaly encountered. Diverting from second-life path to Hazardous Inspection & Materials Recovery.",
+          rule: "Rule-ORC-CRITICAL: Safety first override halts secondary repurposing"
+        });
+      } else if (b.state_of_health_pct >= 82.0) {
+        decision = "CONTINUE_EV";
+        confidence = 93;
+        reasoningFactors = [
+          `High State of Health (${b.state_of_health_pct}%) remains well within automotive performance envelope.`,
+          `Uniform cell balance (${b.cell_voltage_delta_v.toFixed(3)}V) and low internal resistance (${b.internal_resistance_mohm} mΩ).`,
+          "Retaining pack in vehicle or deploying in Certified Pre-Owned EV avoids premature recycling."
+        ];
+        summary = `Battery ${b.battery_id} is in healthy condition (${b.state_of_health_pct}% SoH). Continue vehicle operation. Premature removal would lead to unnecessary lifecycle waste.`;
+
+        trace.push({
+          step: 3,
+          agent: "Decision-Making Orchestrator",
+          action: "Automotive Retention Assessment",
+          reasoning: "SoH exceeds 82% threshold with zero anomalous flags. Recommending automotive continuation.",
+          rule: "Rule-ORC-RETAIN: Automotive retention prioritized over secondary cascade"
+        });
+      } else if (b.state_of_health_pct >= 62.0) {
+        decision = "EVALUATE_SECOND_LIFE";
+        confidence = 92;
+        reasoningFactors = [
+          `Capacity (${b.state_of_health_pct}% SoH) is retired from EV duty, but ideal for stationary energy storage.`,
+          `Stable electrochemical baseline provides ~${rulYears} years of clean solar buffering before recycling.`,
+          "Repurposing for stationary storage extends useful product lifecycle and cuts total cost of ownership."
+        ];
+        summary = `Battery ${b.battery_id} is prime for second-life repurposing (${b.state_of_health_pct}% SoH). Highest suitability: Stationary Solar Microgrid Storage (94%).`;
+
+        trace.push({
+          step: 3,
+          agent: "Decision-Making Orchestrator",
+          action: "Second-Life Pathway Routing",
+          reasoning: `SoH is within 62-82% sweet spot. Routing to Second-Life Agent for application matching and Recycling Agent for circular baseline.`,
+          rule: "Rule-ORC-2ND-LIFE: Repurpose retired automotive packs before recycling"
+        });
+      } else {
+        decision = "RECYCLE_NOW";
+        confidence = 94;
+        reasoningFactors = [
+          `State of Health (${b.state_of_health_pct}%) is below viable second-life threshold (62%).`,
+          "Elevated internal resistance causes excessive heat dissipation during stationary cycling.",
+          "Direct hydrometallurgical recycling optimizes recovery of critical materials (Lithium, Nickel, Cobalt, Graphite)."
+        ];
+        summary = `Battery ${b.battery_id} has reached end-of-life exhaustion (${b.state_of_health_pct}% SoH). Immediate transfer to an authorized closed-loop recycling facility is recommended.`;
+
+        trace.push({
+          step: 3,
+          agent: "Decision-Making Orchestrator",
+          action: "Closed-Loop Recycling Allocation",
+          reasoning: "SoH below 62% threshold. Secondary economics non-viable. Triggering full material recovery routing.",
+          rule: "Rule-ORC-RECYCLE: Direct cathode mineral recovery for depleted packs"
+        });
+      }
+
+      // STEP 4A: Second-Life Evaluation
+      const isSecondLifeEligible = (decision === "EVALUATE_SECOND_LIFE");
+      const slLatency = (performance.now() - t3Start).toFixed(1);
+
+      // STEP 4B: Recycling & Sustainability Metrics
+      const w = b.battery_weight_kg;
+      const isNmc = b.chemistry.includes("NMC");
+      const liKg = (w * (isNmc ? 0.035 : 0.028)).toFixed(1);
+      const niKg = (isNmc ? (w * 0.18).toFixed(1) : 0);
+      const coKg = (isNmc ? (w * 0.05).toFixed(1) : 0);
+      const cuKg = (w * 0.09).toFixed(1);
+      const alKg = (w * 0.14).toFixed(1);
+      const grKg = (w * 0.15).toFixed(1);
+
+      const co2Avoided = (w * 3.85).toFixed(0);
+      const wasteDiverted = (w * 0.94).toFixed(1);
+      const waterSaved = (w * 260.0).toLocaleString();
+
+      trace.push({
+        step: 4,
+        agent: "Decision-Making Orchestrator",
+        action: "Consolidated Lifecycle Recommendation",
+        reasoning: `Synthesized multi-agent inputs. Assigned lifecycle path '${decision}' with ${confidence}% consensus.`,
+        rule: "Rule-ORC-SYNTHESIS: Multi-agent consensus with explainability audit"
+      });
+
+      const totalTime = (performance.now() - startTime).toFixed(1);
+
+      return {
+        decision,
+        summary,
+        confidence,
+        reasoningFactors,
+        conditionRating,
+        reasonsForInspection,
+        rulCycles,
+        rulYears,
+        thermalStatus,
+        cellBalance,
+        irStatus,
+        isSecondLifeEligible,
+        recyclingMetrics: {
+          co2Avoided,
+          wasteDiverted,
+          waterSaved,
+          materials: [
+            { name: "Lithium (Li₂CO₃ eq)", kg: liKg, purity: "96.5%", val: `$${(liKg * 18.5).toFixed(0)}` },
+            { name: "Battery-Grade Nickel", kg: niKg, purity: "99.2%", val: `$${(niKg * 16.0).toFixed(0)}` },
+            { name: "Cobalt Sulfate", kg: coKg, purity: "98.8%", val: `$${(coKg * 28.0).toFixed(0)}` },
+            { name: "Refined Copper", kg: cuKg, purity: "99.5%", val: `$${(cuKg * 9.2).toFixed(0)}` },
+            { name: "Aluminum Casings", kg: alKg, purity: "97.0%", val: `$${(alKg * 2.4).toFixed(0)}` },
+            { name: "Synthetic Graphite", kg: grKg, purity: "95.0%", val: `$${(grKg * 1.8).toFixed(0)}` }
+          ]
+        },
+        trace,
+        latencies: {
+          val: valLatency,
+          health: healthLatency,
+          orch: "3.4",
+          sl: slLatency,
+          total: totalTime
+        }
+      };
+    }
+
+    // RENDER FUNCTIONS
+    function renderScenarioButtons() {
+      const container = document.getElementById("scenarioButtonsContainer");
+      container.innerHTML = SCENARIOS.map(s => `
+        <button onclick="loadScenario('${s.id}')" class="text-left p-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:border-eco-500/50 hover:bg-slate-900 transition-all duration-150 group">
+          <div class="text-xs font-bold text-slate-200 group-hover:text-eco-300">${s.title}</div>
+          <div class="text-[10px] text-slate-400 truncate mt-0.5">${s.subtitle}</div>
+        </button>
+      `).join('');
+    }
+
+    function renderDashboard(res) {
+      // 1. Pipeline Total Latency
+      document.getElementById("pipelineTotalTime").innerText = `${res.latencies.total} ms`;
+
+      // 2. Decision Badge & Summary
+      const badge = document.getElementById("decisionBadge");
+      const summary = document.getElementById("decisionSummary");
+      const conf = document.getElementById("decisionConfidence");
+      const reasonList = document.getElementById("reasoningList");
+
+      conf.innerText = `${res.confidence}%`;
+      summary.innerText = res.summary;
+
+      // Colorize decision badge
+      if (res.decision === "EVALUATE_SECOND_LIFE") {
+        badge.className = "px-3.5 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/50";
+        badge.innerText = "EVALUATE SECOND-LIFE REUSE";
+      } else if (res.decision === "CONTINUE_EV") {
+        badge.className = "px-3.5 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/50";
+        badge.innerText = "CONTINUE AUTOMOTIVE EV OPERATION";
+      } else if (res.decision === "INSPECT_OR_REPAIR") {
+        badge.className = "px-3.5 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-red-500/20 text-red-300 border border-red-500/50 animate-pulse";
+        badge.innerText = "CRITICAL INSPECTION & ISOLATION REQUIRED";
+      } else {
+        badge.className = "px-3.5 py-1.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/50";
+        badge.innerText = "DIRECT CLOSED-LOOP RECYCLING";
+      }
+
+      reasonList.innerHTML = res.reasoningFactors.map(f => `
+        <li class="flex items-start space-x-2">
+          <span class="text-eco-400 mt-0.5">•</span>
+          <span>${f}</span>
+        </li>
+      `).join('');
+
+      // 3. Health Analysis Card
+      document.getElementById("healthConditionBadge").innerText = res.conditionRating;
+      document.getElementById("healthRulYears").innerText = `${res.rulYears} yrs`;
+      document.getElementById("healthRulCycles").innerText = `~${res.rulCycles} cycles`;
+      document.getElementById("healthCellDelta").innerText = `${currentBattery.cell_voltage_delta_v.toFixed(3)} V`;
+      document.getElementById("healthCellStatus").innerText = res.cellBalance;
+      document.getElementById("healthTemp").innerText = `${currentBattery.operating_temp_c} °C`;
+      document.getElementById("healthThermalStatus").innerText = res.thermalStatus;
+      document.getElementById("healthResistance").innerText = `${currentBattery.internal_resistance_mohm} mΩ`;
+      document.getElementById("healthIrStatus").innerText = res.irStatus;
+
+      // Inspection alert box
+      const alertBox = document.getElementById("inspectionAlertBox");
+      const reasonsUl = document.getElementById("inspectionReasonsList");
+      if (res.reasonsForInspection && res.reasonsForInspection.length > 0) {
+        alertBox.classList.remove("hidden");
+        reasonsUl.innerHTML = res.reasonsForInspection.map(r => `<li>${r}</li>`).join('');
+      } else {
+        alertBox.classList.add("hidden");
+      }
+
+      // 4. Second-Life Applications
+      const slBadge = document.getElementById("secondLifeEligibleBadge");
+      const slContainer = document.getElementById("secondLifeApplicationsContainer");
+
+      if (res.isSecondLifeEligible) {
+        slBadge.className = "text-xs px-2.5 py-1 rounded-full font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+        slBadge.innerText = "Eligible for Second-Life Repurposing";
+
+        slContainer.innerHTML = `
+          <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold text-white">Stationary Solar Microgrid Storage</span>
+                <span class="text-[10px] text-slate-400 block">Commercial &amp; Community Solar Buffer</span>
+              </div>
+              <div class="text-right">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">94% Suitability</span>
+                <span class="text-[9px] text-slate-400 block mt-0.5">High Confidence</span>
+              </div>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 94%"></div>
+            </div>
+            <p class="text-[11px] text-slate-300 pt-1">
+              Low continuous discharge (0.3C) extends pack life by 5 to 8 years. Temperature-controlled stationary enclosures prevent thermal fatigue.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold text-white">Residential Backup &amp; Telecom UPS</span>
+                <span class="text-[10px] text-slate-400 block">Emergency Power Standby</span>
+              </div>
+              <div class="text-right">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">88% Suitability</span>
+                <span class="text-[9px] text-slate-400 block mt-0.5">Suitable</span>
+              </div>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 88%"></div>
+            </div>
+            <p class="text-[11px] text-slate-300 pt-1">
+              Standby float operation involves infrequent cycling, offering cost savings of 40-60% versus newly manufactured home storage units.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold text-white">Off-Grid Agricultural Irrigation Storage</span>
+                <span class="text-[10px] text-slate-400 block">Remote Water Pumping &amp; Farm Microgrid</span>
+              </div>
+              <div class="text-right">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">82% Suitability</span>
+                <span class="text-[9px] text-slate-400 block mt-0.5">Suitable</span>
+              </div>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-gradient-to-r from-teal-500 to-cyan-400 h-full rounded-full" style="width: 82%"></div>
+            </div>
+            <p class="text-[11px] text-slate-300 pt-1">
+              Tolerant of moderate capacity variance with ruggedized IP65 enclosure for agricultural installations.
+            </p>
+          </div>
+        `;
+      } else {
+        slBadge.className = "text-xs px-2.5 py-1 rounded-full font-semibold bg-red-500/20 text-red-300 border border-red-500/30";
+        slBadge.innerText = "Ineligible for Second Life";
+
+        slContainer.innerHTML = `
+          <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 text-center space-y-2">
+            <span class="text-2xl">🛑</span>
+            <h4 class="text-xs font-bold text-slate-200">Second-Life Repurposing Disqualified</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              ${res.decision === "INSPECT_OR_REPAIR" 
+                ? "Physical swelling, high temperature, or severe cell imbalance presents thermal runaway hazards. Never repurpose an unverified or damaged pack."
+                : res.decision === "CONTINUE_EV"
+                ? "Battery remains within primary vehicle operational requirements (>82% SoH). Secondary reuse at this stage is economically premature."
+                : "Deep electrochemical degradation (<62% SoH) makes secondary storage inefficient and prone to cell breakdown. Route to mineral recycling."}
+            </p>
+          </div>
+        `;
+      }
+
+      // 5. Recycling Metrics
+      document.getElementById("metricCo2").innerText = `${res.recyclingMetrics.co2Avoided} kg CO₂e`;
+      document.getElementById("metricWaste").innerText = `${res.recyclingMetrics.wasteDiverted} kg`;
+      document.getElementById("metricWater").innerText = `${res.recyclingMetrics.waterSaved} L`;
+
+      const matGrid = document.getElementById("materialRecoveryGrid");
+      matGrid.innerHTML = res.recyclingMetrics.materials.map(m => `
+        <div class="bg-slate-950/70 p-2.5 rounded-lg border border-slate-800/80">
+          <div class="text-[11px] font-semibold text-slate-200 truncate">${m.name}</div>
+          <div class="text-sm font-bold text-white mt-0.5">${m.kg} kg</div>
+          <div class="flex justify-between items-center text-[9px] text-slate-400 font-mono mt-0.5">
+            <span>${m.purity} purity</span>
+            <span class="text-eco-400 font-semibold">${m.val}</span>
+          </div>
+        </div>
+      `).join('');
+
+      // 6. Decision Trace Timeline
+      const timeline = document.getElementById("decisionTraceTimeline");
+      timeline.innerHTML = res.trace.map(t => `
+        <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs">
+          <span class="w-5 h-5 rounded-full bg-slate-800 text-eco-400 flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">
+            ${t.step}
+          </span>
+          <div class="space-y-0.5 flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-200">${t.agent}</span>
+              <span class="text-[10px] font-mono text-slate-400">${t.action}</span>
+            </div>
+            <p class="text-slate-300 text-[11px]">${t.reasoning}</p>
+            <div class="text-[10px] font-mono text-emerald-400/80">${t.rule}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // FORM SYNC & DISPATCH
+    function syncFormToState() {
+      currentBattery.battery_id = document.getElementById("inputBatteryId").value;
+      currentBattery.chemistry = document.getElementById("inputChemistry").value;
+      currentBattery.state_of_health_pct = parseFloat(document.getElementById("inputSoH").value);
+      currentBattery.pack_capacity_kwh = parseFloat(document.getElementById("inputPackCapacity").value);
+      currentBattery.cycle_count = parseInt(document.getElementById("inputCycleCount").value, 10);
+      currentBattery.operating_temp_c = parseFloat(document.getElementById("inputTemp").value);
+      currentBattery.internal_resistance_mohm = parseFloat(document.getElementById("inputResistance").value);
+      currentBattery.cell_voltage_delta_v = parseFloat(document.getElementById("inputCellDelta").value);
+      currentBattery.current_voltage_v = parseFloat(document.getElementById("inputVoltage").value);
+      currentBattery.physical_condition = document.getElementById("inputCondition").value;
+      currentBattery.battery_weight_kg = parseFloat(document.getElementById("inputWeight").value);
+
+      document.getElementById("valSoH").innerText = `${currentBattery.state_of_health_pct.toFixed(1)}%`;
+      
+      // Temperature warning highlight
+      const tempWarn = document.getElementById("tempWarningIcon");
+      if (currentBattery.operating_temp_c > 45.0) {
+        tempWarn.classList.remove("hidden");
+      } else {
+        tempWarn.classList.add("hidden");
+      }
+    }
+
+    function syncStateToForm(b) {
+      document.getElementById("inputBatteryId").value = b.battery_id;
+      document.getElementById("inputChemistry").value = b.chemistry;
+      document.getElementById("inputSoH").value = b.state_of_health_pct;
+      document.getElementById("valSoH").innerText = `${b.state_of_health_pct.toFixed(1)}%`;
+      document.getElementById("inputPackCapacity").value = b.pack_capacity_kwh;
+      document.getElementById("inputCycleCount").value = b.cycle_count;
+      document.getElementById("inputTemp").value = b.operating_temp_c;
+      document.getElementById("inputResistance").value = b.internal_resistance_mohm;
+      document.getElementById("inputCellDelta").value = b.cell_voltage_delta_v;
+      document.getElementById("inputVoltage").value = b.current_voltage_v;
+      document.getElementById("inputCondition").value = b.physical_condition;
+      document.getElementById("inputWeight").value = b.battery_weight_kg;
+
+      const tempWarn = document.getElementById("tempWarningIcon");
+      if (b.operating_temp_c > 45.0) {
+        tempWarn.classList.remove("hidden");
+      } else {
+        tempWarn.classList.add("hidden");
+      }
+    }
+
+    async function executePipeline() {
+      syncFormToState();
+
+      if (useFastApiBackend && fastApiAvailable) {
+        try {
+          const res = await fetch("http://localhost:8000/api/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(currentBattery)
+          });
+          if (res.ok) {
+            const data = await res.json();
+            // Adapt FastAPI response to view
+            renderDashboard({
+              decision: data.final_lifecycle_decision,
+              summary: data.decision_summary,
+              confidence: data.confidence_score_pct,
+              reasoningFactors: data.reasoning_factors,
+              conditionRating: data.health_agent_result?.condition_rating || "Evaluated",
+              reasonsForInspection: data.health_agent_result?.inspection_reasons || [],
+              rulCycles: data.health_agent_result?.estimated_rul_cycles || 0,
+              rulYears: data.health_agent_result?.estimated_rul_years || 0,
+              thermalStatus: data.health_agent_result?.thermal_status || "Normal",
+              cellBalance: data.health_agent_result?.cell_balance_status || "Balanced",
+              irStatus: data.health_agent_result?.internal_resistance_health || "Low",
+              isSecondLifeEligible: data.final_lifecycle_decision === "EVALUATE_SECOND_LIFE",
+              recyclingMetrics: {
+                co2Avoided: data.recycling_agent_result?.estimated_co2_avoided_kg || 1500,
+                wasteDiverted: data.recycling_agent_result?.estimated_waste_diverted_kg || 400,
+                waterSaved: (data.recycling_agent_result?.estimated_water_saved_liters || 100000).toLocaleString(),
+                materials: (data.recycling_agent_result?.potential_material_recovery || []).map(m => ({
+                  name: m.element_name,
+                  kg: m.estimated_kg,
+                  purity: `${m.recovery_purity_pct}%`,
+                  val: `$${m.market_value_usd}`
+                }))
+              },
+              trace: data.decision_trace.map(t => ({
+                step: t.step_number,
+                agent: t.agent_name,
+                action: t.action,
+                reasoning: t.reasoning,
+                rule: t.rule_applied
+              })),
+              latencies: {
+                total: data.total_execution_time_ms
+              }
+            });
+            return;
+          }
+        } catch (e) {
+          console.warn("FastAPI backend error, falling back to autonomous client simulation.", e);
+        }
+      }
+
+      // Default: Autonomous client-side simulation engine
+      const simResult = runClientSideAgentPipeline(currentBattery);
+      renderDashboard(simResult);
+    }
+
+    function loadScenario(scenarioId) {
+      const scen = SCENARIOS.find(s => s.id === scenarioId);
+      if (scen) {
+        currentBattery = { ...scen.battery };
+        syncStateToForm(currentBattery);
+        executePipeline();
+      }
+    }
+
+    async function checkFastApiBackend() {
+      const btn = document.getElementById("btnCheckBackend");
+      const dot = document.getElementById("backendDot");
+      const txt = document.getElementById("backendText");
+
+      txt.innerText = "Checking FastAPI...";
+      try {
+        const response = await fetch("http://localhost:8000/api/health", { method: "GET" });
+        if (response.ok) {
+          fastApiAvailable = true;
+          useFastApiBackend = true;
+          dot.className = "w-2 h-2 rounded-full bg-emerald-400";
+          txt.innerText = "FastAPI Backend Connected";
+          alert("✅ Connected to Python FastAPI backend at http://localhost:8000!");
+          executePipeline();
+          return;
+        }
+      } catch (e) {
+        // Backend not running
+      }
+      fastApiAvailable = false;
+      useFastApiBackend = false;
+      dot.className = "w-2 h-2 rounded-full bg-eco-400";
+      txt.innerText = "Autonomous Client Simulation Engine (GitHub Pages Mode)";
+      alert("ℹ️ FastAPI backend is not running locally (http://localhost:8000).\n\nEcoLoop AI is currently running in Standalone Multi-Agent Simulation Mode (GitHub Pages ready) with 100% deterministic decision logic!");
+    }
+
+    // EVENT LISTENERS FOR INSTANT FEEDBACK LOOP
+    document.addEventListener("DOMContentLoaded", () => {
+      renderScenarioButtons();
+      syncStateToForm(currentBattery);
+      executePipeline();
+
+      // Form inputs trigger instant re-analysis
+      const form = document.getElementById("batteryForm");
+      form.addEventListener("input", () => {
+        executePipeline();
+      });
+
+      document.getElementById("btnRunPipeline").addEventListener("click", () => {
+        executePipeline();
+      });
+
+      document.getElementById("btnResetDefaults").addEventListener("click", () => {
+        loadScenario("scenario-second-life");
+      });
+
+      document.getElementById("btnCheckBackend").addEventListener("click", () => {
+        checkFastApiBackend();
+      });
+    });
+  </script>
+</body>
+</html>

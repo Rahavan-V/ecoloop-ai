@@ -1,0 +1,107 @@
+[
+  {
+    "id": "scenario-second-life-1",
+    "title": "Prime Second-Life Candidate (Solar Storage)",
+    "description": "Retired EV pack with 76% SoH, uniform cell balance, and low thermal stress. Perfect for microgrid solar buffer.",
+    "battery": {
+      "battery_id": "BAT-NMC-760-SL",
+      "model_name": "Tesla Model 3 Long Range Module",
+      "pack_capacity_kwh": 75.0,
+      "current_capacity_kwh": 57.0,
+      "state_of_health_pct": 76.0,
+      "nominal_voltage_v": 350.0,
+      "current_voltage_v": 346.5,
+      "operating_temp_c": 23.5,
+      "cycle_count": 1450,
+      "internal_resistance_mohm": 17.5,
+      "cell_voltage_delta_v": 0.018,
+      "physical_condition": "Normal",
+      "battery_weight_kg": 460.0,
+      "chemistry": "NMC-811"
+    }
+  },
+  {
+    "id": "scenario-healthy-ev",
+    "title": "Healthy Automotive Pack (Retain in EV)",
+    "description": "High health pack at 89% SoH, low cycle count, low resistance. Recommends continuing automotive service.",
+    "battery": {
+      "battery_id": "BAT-EV-HEALTHY-890",
+      "model_name": "Hyundai Ioniq 5 E-GMP Pack",
+      "pack_capacity_kwh": 77.4,
+      "current_capacity_kwh": 68.9,
+      "state_of_health_pct": 89.0,
+      "nominal_voltage_v": 697.0,
+      "current_voltage_v": 692.0,
+      "operating_temp_c": 22.0,
+      "cycle_count": 410,
+      "internal_resistance_mohm": 11.2,
+      "cell_voltage_delta_v": 0.009,
+      "physical_condition": "Normal",
+      "battery_weight_kg": 475.0,
+      "chemistry": "NMC-622"
+    }
+  },
+  {
+    "id": "scenario-safety-hazard",
+    "title": "Critical Safety Fault (Overheating & Swelling)",
+    "description": "Pack exhibiting elevated temperature, cell imbalance, and physical casing distortion. Triggers emergency isolation.",
+    "battery": {
+      "battery_id": "BAT-HAZARD-CRIT-911",
+      "model_name": "Nissan Leaf Gen 2 Pack",
+      "pack_capacity_kwh": 40.0,
+      "current_capacity_kwh": 26.8,
+      "state_of_health_pct": 67.0,
+      "nominal_voltage_v": 360.0,
+      "current_voltage_v": 338.0,
+      "operating_temp_c": 53.4,
+      "cycle_count": 1820,
+      "internal_resistance_mohm": 58.0,
+      "cell_voltage_delta_v": 0.145,
+      "physical_condition": "Swelling",
+      "battery_weight_kg": 303.0,
+      "chemistry": "NMC-622"
+    }
+  },
+  {
+    "id": "scenario-deep-recycle",
+    "title": "Depleted Pack (Direct Cathode Recycling)",
+    "description": "Exhausted pack with 46% SoH and 3,100 cycles. Not viable for secondary storage; triggers maximum mineral recovery.",
+    "battery": {
+      "battery_id": "BAT-RECYCLE-EOL-460",
+      "model_name": "Chevy Bolt Gen 1 Pack",
+      "pack_capacity_kwh": 60.0,
+      "current_capacity_kwh": 27.6,
+      "state_of_health_pct": 46.0,
+      "nominal_voltage_v": 350.0,
+      "current_voltage_v": 332.0,
+      "operating_temp_c": 25.0,
+      "cycle_count": 3100,
+      "internal_resistance_mohm": 44.5,
+      "cell_voltage_delta_v": 0.065,
+      "physical_condition": "Normal",
+      "battery_weight_kg": 430.0,
+      "chemistry": "NMC-622"
+    }
+  },
+  {
+    "id": "scenario-backup-ups",
+    "title": "Residential Backup & Telecom UPS Pack",
+    "description": "Stable 69% SoH pack with acceptable impedance. Best suited for low-frequency emergency power rather than daily solar cycles.",
+    "battery": {
+      "battery_id": "BAT-UPS-RESID-690",
+      "model_name": "Renault Zoe Pack",
+      "pack_capacity_kwh": 52.0,
+      "current_capacity_kwh": 35.8,
+      "state_of_health_pct": 69.0,
+      "nominal_voltage_v": 400.0,
+      "current_voltage_v": 392.0,
+      "operating_temp_c": 21.0,
+      "cycle_count": 1690,
+      "internal_resistance_mohm": 22.0,
+      "cell_voltage_delta_v": 0.028,
+      "physical_condition": "Normal",
+      "battery_weight_kg": 326.0,
+      "chemistry": "NMC-622"
+    }
+  }
+]
