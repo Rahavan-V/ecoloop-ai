@@ -268,21 +268,6 @@ git push -u origin main
 
 ---
 
-## 🌐 Publishing to GitHub Pages (Live Website)
-
-You can publish this website on GitHub Pages so anyone in the world can open it via a live URL:
-
-1. Go to your repository on GitHub (`https://github.com/your-username/ecoloop-ai`).
-2. Click on the **Settings** tab near the top right.
-3. In the left sidebar, click on **Pages**.
-4. Under **Build and deployment**:
-   - **Source**: Select `Deploy from a branch`.
-   - **Branch**: Select `main` from the dropdown, leave the folder as `/ (root)`, and click **Save**.
-5. Wait 1 to 2 minutes for GitHub to publish the site.
-6. Refresh the page: you will see a green banner with your live link:
-   > 🚀 **Your site is live at: `https://your-username.github.io/ecoloop-ai/`**
-
----
 
 ## 🛡️ Safety & Advisory Standards
 
